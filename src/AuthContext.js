@@ -1,0 +1,68 @@
+import { createContext, useContext, useState } from 'react';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, sendPasswordResetEmail } from 'firebase/auth'
+import { auth } from './App'
+import { useLocation, Navigate } from 'react-router-dom'
+
+const UserContext = createContext()
+
+export const AuthContextProvider = ({ children }) => {
+
+  const [user, setUser] = useState()
+
+
+  const createUser = (email, password) => {
+    return createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in 
+        const user = userCredential.user;
+        setUser(user)
+      })
+  }
+
+  const signIn = (email, password) => {
+    return signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in 
+        const user = userCredential.user;
+        setUser(user)
+      })
+  }
+
+  const resetPassword = (email) => {
+    return sendPasswordResetEmail(auth, email)
+      .then(() => {
+        console.log("Password reset email sent!")
+        // ..
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // ..
+      });
+  }
+
+  return (
+    <UserContext.Provider value={{ createUser, signIn, resetPassword, user, RequireAuth }}>
+      {children}
+    </UserContext.Provider>
+  )
+}
+
+export default function RequireAuth({ children }) {
+  const { user } = UserAuth()
+  let location = useLocation();
+
+  if (!user) {
+    // Redirect them to the /login page, but save the current location they were
+    // trying to go to when they were redirected. This allows us to send them
+    // along to that page after they login, which is a nicer user experience
+    // than dropping them off on the home page.
+    return <Navigate to="/" state={{ from: location }} replace />;
+  }
+
+  return children;
+}
+
+export const UserAuth = () => {
+  return useContext(UserContext)
+}
