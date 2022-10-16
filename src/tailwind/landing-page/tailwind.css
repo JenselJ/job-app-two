@@ -1,8 +1,8 @@
-/* @tailwind base; */
+@tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 .bgImage {
-  background-image: url("bgImage.jpg");
+  background-image: url('bgImage.jpg');
   background-size: cover;
 }
