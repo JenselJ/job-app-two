@@ -172,6 +172,8 @@ function HomePage() {
   const [jobsArray, setJobsArray] = useState([]);
   const { user } = UserAuth();
 
+  const [addJobShow, setAddJobShow] = useState(false);
+
   useEffect(() => {
     getJobs();
     console.log('use effect');
@@ -271,7 +273,9 @@ function HomePage() {
       console.log(data);
       getJobs(); // JSON data parsed by `data.json()` call
     });
-    setModalShow(false);
+    setAddJobShow(false);
+    setJobTitle('');
+    setJobDescription('');
   }
 
   // const app = express();
@@ -312,7 +316,7 @@ function HomePage() {
               <button
                 type="submit"
                 className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                onClick={() => setModalShow(true)}
+                onClick={() => setAddJobShow(true)}
               >
                 Add Job
               </button>
@@ -347,14 +351,6 @@ function HomePage() {
           </Container> */}
         </header>
         <div className="ml-10 mt-20 grid grid-cols-3">
-          <AddJobModal
-            handleSubmit={handleSubmit}
-            setJobTitle={setJobTitle}
-            setJobDescription={setJobDescription}
-            show={modalShow}
-            onHide={() => setModalShow(false)}
-          />
-
           {jobsArray.map(job => (
             <div className="mb-20 w-96 rounded-md bg-gray-100">
               <JobCardTwo
@@ -394,6 +390,14 @@ function HomePage() {
             </div>
           </div> */}
         </div>
+        <AddJobModal
+          handleSubmit={handleSubmit}
+          setJobTitle={setJobTitle}
+          setJobDescription={setJobDescription}
+          addJobShow={addJobShow}
+          setAddJobShow={setAddJobShow}
+          onHide={() => setAddJobShow(false)}
+        />
       </div>
     </>
   );

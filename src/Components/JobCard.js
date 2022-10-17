@@ -102,9 +102,9 @@ export default function JobCardTwo({
             <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
               {job}{' '}
             </h5>
-            <h6>{description}</h6>
+            <h6 className="mt-2 ml-2">{description}</h6>
           </a>
-          <div className="mt-2.5 mb-5 flex items-center">
+          {/* <div className="mt-2.5 mb-5 flex items-center">
             <svg
               className="h-5 w-5 text-yellow-300"
               fill="currentColor"
@@ -148,8 +148,8 @@ export default function JobCardTwo({
             <span className="mr-2 ml-3 rounded bg-blue-100 px-2.5 py-0.5 text-xs font-semibold text-blue-800 dark:bg-blue-200 dark:text-blue-800">
               5.0
             </span>
-          </div>
-          <div className="flex items-center justify-between">
+          </div> */}
+          <div className="flex items-center justify-between mt-5">
             <span className="text-3xl font-bold text-gray-900 dark:text-white">
               $599
             </span>
