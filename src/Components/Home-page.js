@@ -244,6 +244,8 @@ function HomePage() {
 
   const [jobTitle, setJobTitle] = useState('');
   const [jobDescription, setJobDescription] = useState('');
+  const [jobSalary, setJobSalary] = useState();
+  const [jobSalaryUnit, setJobSalaryUnit] = useState();
   const [modalShow, setModalShow] = useState(false);
 
   const myRequest = new Request(`${apiUrl}/jobs`, {
@@ -264,9 +266,12 @@ function HomePage() {
 
   function handleSubmit(e) {
     e.preventDefault();
+    console.log(jobSalary, jobSalaryUnit);
     postData(`${apiUrl}/jobs`, {
       job: jobTitle,
       description: jobDescription,
+      salary: jobSalary,
+      salaryUnit: jobSalaryUnit,
       email: user.email,
       userId: user.uid,
     }).then(data => {
@@ -364,6 +369,8 @@ function HomePage() {
                 setCommentsJobsArray={setCommentsJobsArray}
                 getComments={getComments}
                 getJobs={getJobs}
+                jobSalary={job.salary}
+                jobSalaryUnit={job.salaryUnit}
               />
             </div>
           ))}
@@ -397,6 +404,8 @@ function HomePage() {
           addJobShow={addJobShow}
           setAddJobShow={setAddJobShow}
           onHide={() => setAddJobShow(false)}
+          setJobSalary={setJobSalary}
+          setJobSalaryUnit={setJobSalaryUnit}
         />
       </div>
     </>

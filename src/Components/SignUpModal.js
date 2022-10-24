@@ -17,6 +17,7 @@ import {
 import { useNavigate, Navigate, useLocation } from 'react-router-dom';
 import { UserAuth } from '../AuthContext.js';
 import './SignUpModal.css';
+import { updateProfile } from 'firebase/auth';
 
 export default function SignUpModal({
   setSignupShow,
@@ -25,17 +26,27 @@ export default function SignUpModal({
 }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [name, setName] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  const { createUser } = UserAuth();
+  const { createUser, user } = UserAuth();
 
   const handleSubmit = async e => {
     console.log('handle submit');
     e.preventDefault();
     setError('');
     try {
-      await createUser(email, password);
+      await createUser(email, password, name);
+      // updateProfile(user, {
+      //   displayName: name,
+      // })
+      //   .then(() => {
+      //     console.log(user.displayName);
+      //   })
+      //   .catch(error => {
+      //     console.log(error.message);
+      //   });
       navigate('/home');
       // navigate to the profile screen if successful
     } catch (error) {
@@ -100,6 +111,17 @@ export default function SignUpModal({
                       required=""
                       value={email}
                       onChange={e => setEmail(e.target.value)}
+                    />
+                  </div>
+                  <div>
+                    <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                      Your Username
+                    </label>
+                    <input
+                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                      placeholder="Jackson Smith"
+                      required=""
+                      onChange={e => setName(e.target.value)}
                     />
                   </div>
                   <div>

@@ -1,6 +1,8 @@
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
+import './AddJob.css';
+import { useState } from 'react';
 
 export default function AddJobModal({
   addJobShow,
@@ -8,7 +10,21 @@ export default function AddJobModal({
   setJobDescription,
   handleSubmit,
   setAddJobShow,
+  setJobSalary,
+  setJobSalaryUnit,
 }) {
+  const [dropdownShow, setDropdownShow] = useState(false);
+
+  function dropdownVisiblity() {
+    console.log('dropdown visiblity triggered');
+    if (dropdownShow === false) {
+      setDropdownShow(true);
+    } else if (dropdownShow === true) {
+      setDropdownShow(false);
+    }
+    console.log(dropdownShow);
+  }
+
   return (
     // <Modal
     // {...props}
@@ -74,12 +90,12 @@ export default function AddJobModal({
               </button>
               <div className="py-6 px-6 lg:px-8">
                 <h3 className="mb-4 text-xl font-medium text-gray-900 dark:text-white">
-                  Job Name{' '}
+                  Add a Job Listing{' '}
                 </h3>
                 <form className="space-y-6" action="#">
                   <div>
                     <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-                      Your email
+                      Job Name
                     </label>
                     <input
                       className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
@@ -94,16 +110,172 @@ export default function AddJobModal({
                     <input
                       className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                       required=""
+                      type="number"
                       onChange={e => setJobDescription(e.target.value)}
                     />
                   </div>
-                  <div className="flex justify-between">
-                    <a
-                      href="#"
-                      className="text-sm text-blue-700 hover:underline dark:text-blue-500"
-                    >
-                      Forgot Password?
-                    </a>
+                  <div>
+                    <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                      Salary{' '}
+                    </label>
+                    <div className="flex flex-row">
+                      <div className="w-12 bg-gray-200 flex items-center justify-center rounded-lg mr-1">
+                        <div>$</div>
+                      </div>
+                      <div className="w-3/4">
+                        <input
+                          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                          required=""
+                          type="number"
+                          min="1"
+                          max="7"
+                          onChange={e => setJobSalary(e.target.value)}
+                        />
+                      </div>
+                      <div className="w-1/4">
+                        <button
+                          id="dropdownRadioBgHoverButton"
+                          data-dropdown-toggle="dropdownRadioBgHover"
+                          className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 ml-1 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                          type="button"
+                          onClick={dropdownVisiblity}
+                        >
+                          per{' '}
+                          <svg
+                            className="ml-2 w-4 h-4"
+                            aria-hidden="true"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="M19 9l-7 7-7-7"
+                            ></path>
+                          </svg>
+                        </button>
+                        <div
+                          id="dropdownRadioBgHover"
+                          className="z-10 w-48 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600 dropdown"
+                          style={{
+                            visibility:
+                              dropdownShow === true ? 'visible' : 'hidden',
+                          }}
+                          data-popper-reference-hidden=""
+                          data-popper-escaped=""
+                          data-popper-placement="bottom"
+                        >
+                          <ul
+                            className="p-3 space-y-1 text-sm text-gray-700 dark:text-gray-200"
+                            aria-labelledby="dropdownRadioBgHoverButton"
+                          >
+                            <li>
+                              <div className="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
+                                <input
+                                  id="default-radio-4"
+                                  type="radio"
+                                  value=""
+                                  name="default-radio"
+                                  className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                                  onClick={() => {
+                                    setJobSalaryUnit('/hr');
+                                  }}
+                                />
+                                <label
+                                  for="default-radio-4"
+                                  className="ml-2 w-full text-sm font-medium text-gray-900 rounded dark:text-gray-300"
+                                >
+                                  hour
+                                </label>
+                              </div>
+                            </li>
+                            <li>
+                              <div className="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
+                                <input
+                                  id="default-radio-4"
+                                  type="radio"
+                                  value=""
+                                  name="default-radio"
+                                  onClick={() => {
+                                    setJobSalaryUnit('/day');
+                                  }}
+                                  className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                                />
+                                <label
+                                  for="default-radio-4"
+                                  className="ml-2 w-full text-sm font-medium text-gray-900 rounded dark:text-gray-300"
+                                >
+                                  day
+                                </label>
+                              </div>
+                            </li>
+                            <li>
+                              <div className="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
+                                <input
+                                  id="default-radio-6"
+                                  type="radio"
+                                  value=""
+                                  name="default-radio"
+                                  onClick={() => {
+                                    setJobSalaryUnit('/wk');
+                                  }}
+                                  className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                                />
+                                <label
+                                  for="default-radio-6"
+                                  className="ml-2 w-full text-sm font-medium text-gray-900 rounded dark:text-gray-300"
+                                >
+                                  week
+                                </label>
+                              </div>
+                            </li>
+                            <li>
+                              <div className="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
+                                <input
+                                  id="default-radio-6"
+                                  type="radio"
+                                  value=""
+                                  name="default-radio"
+                                  onClick={() => {
+                                    setJobSalaryUnit('/mo');
+                                  }}
+                                  className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                                />
+                                <label
+                                  for="default-radio-6"
+                                  className="ml-2 w-full text-sm font-medium text-gray-900 rounded dark:text-gray-300"
+                                >
+                                  month
+                                </label>
+                              </div>
+                            </li>
+                            <li>
+                              <div className="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
+                                <input
+                                  id="default-radio-6"
+                                  type="radio"
+                                  value=""
+                                  name="default-radio"
+                                  onClick={() => {
+                                    setJobSalaryUnit('/yr');
+                                  }}
+                                  className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                                />
+                                <label
+                                  for="default-radio-6"
+                                  className="ml-2 w-full text-sm font-medium text-gray-900 rounded dark:text-gray-300"
+                                >
+                                  year
+                                </label>
+                              </div>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                   <button
                     type="submit"
@@ -112,9 +284,6 @@ export default function AddJobModal({
                   >
                     Submit{' '}
                   </button>
-                  <div className="text-sm font-medium text-gray-500 dark:text-gray-300">
-                    Not registered?{' '}
-                  </div>
                 </form>
               </div>
             </div>
