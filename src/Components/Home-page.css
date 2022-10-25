@@ -59,3 +59,23 @@
   display: flex;
   align-items: center;
 }
+
+@media (max-width: 576px) {
+  .header {
+    flex-direction: column;
+  }
+
+  .header-child {
+    flex-direction: column;
+  }
+}
+
+@media (min-width: 577px) {
+  .header {
+    flex-direction: row;
+  }
+
+  .header-child {
+    flex-direction: row;
+  }
+}
