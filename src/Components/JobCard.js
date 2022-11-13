@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { UserAuth } from '../AuthContext';
 import { currencyFormatter } from './utils';
+import './JobCard.css';
 
 // const apiUrl = 'https://job-app-backend-sunny.herokuapp.com'
 
@@ -19,6 +20,7 @@ export default function JobCardTwo({
   userId,
   jobSalary,
   jobSalaryUnit,
+  contactEmail,
 }) {
   const { user } = UserAuth();
 
@@ -63,6 +65,7 @@ export default function JobCardTwo({
       id: id,
       email: user.email,
       userId: user.uid,
+      username: user.displayName,
     }).then(data => {
       console.log(data); // JSON data parsed by `data.json()` call
       setComment('');
@@ -99,11 +102,11 @@ export default function JobCardTwo({
 
   return (
     <>
-      <div className="max-w-sm p-3">
+      <div className="max-w-sm p-3 shadow-md rounded-md bg-gray-100">
         <div>
           <div className="flex flex-row justify-between">
             <div>
-              <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
+              <h5 className="text-xl max-w-xs font-semibold tracking-tight text-gray-900 dark:text-white">
                 {job}{' '}
               </h5>
               <h6 className="mt-2 ml-2">{description}</h6>
@@ -171,15 +174,16 @@ export default function JobCardTwo({
               5.0
             </span>
           </div> */}
-          <div className="flex items-center justify-between mt-5">
+          <div className="mt-3">Contact email: {contactEmail}</div>
+          <div className="flex items-center justify-between mt-4">
             <span className="text-3xl font-bold text-gray-900 dark:text-white">
               {currencyFormatter.format(jobSalary)}
               {jobSalaryUnit}
             </span>
             <a
               onClick={commentVisiblity}
-              href="#"
-              className="rounded-lg bg-blue-700 px-4 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              href="javascript:void(0)"
+              className="rounded-lg bg-blue-700 px-3 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             >
               {view} Comments
             </a>
@@ -193,7 +197,7 @@ export default function JobCardTwo({
                 }}
                 className="p-2 rounded-md"
               >
-                {comment.email} : {comment.comment}
+                {comment.username} : {comment.comment}
               </div>
             ))}
           </div>
@@ -205,7 +209,7 @@ export default function JobCardTwo({
               onChange={e => setComment(e.target.value)}
             />
             <button
-              className="bg-blue-600 text-white rounded-full md:rounded-tl-none md:rounded-bl-none text-md py-3 px-6 cursor-pointer hover:opacity-75 duration-150 outline-none"
+              className="post-btn bg-blue-600 text-white rounded-full md:rounded-tl-none md:rounded-bl-none text-md py-3 px-6 cursor-pointer hover:opacity-75 duration-150 outline-none"
               onClick={handleCommentSubmit}
             >
               Post

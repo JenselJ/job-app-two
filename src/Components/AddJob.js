@@ -12,8 +12,12 @@ export default function AddJobModal({
   setAddJobShow,
   setJobSalary,
   setJobSalaryUnit,
+  setContactEmail,
 }) {
   const [dropdownShow, setDropdownShow] = useState(false);
+  const [jobNameFail, setJobNameFail] = useState(false);
+  const [jobDescriptionFail, setJobDescriptionFail] = useState(false);
+  const [jobSalaryFail, setJobSalaryFail] = useState(false);
 
   function dropdownVisiblity() {
     console.log('dropdown visiblity triggered');
@@ -102,6 +106,14 @@ export default function AddJobModal({
                       required=""
                       onChange={e => setJobTitle(e.target.value)}
                     />
+                    <label
+                      className="block mt-2 text-red-500 text-xs font-medium text-gray-900 dark:text-gray-300"
+                      style={{
+                        display: jobNameFail === true ? '' : 'none',
+                      }}
+                    >
+                      Job name should be 1-30 characters long
+                    </label>
                   </div>
                   <div>
                     <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
@@ -110,9 +122,16 @@ export default function AddJobModal({
                     <input
                       className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                       required=""
-                      type="number"
                       onChange={e => setJobDescription(e.target.value)}
                     />
+                    <label
+                      className="block mt-2 text-red-500 text-xs font-medium text-gray-900 dark:text-gray-300"
+                      style={{
+                        display: jobDescriptionFail === true ? '' : 'none',
+                      }}
+                    >
+                      Job description should be max 200 characters long
+                    </label>
                   </div>
                   <div>
                     <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
@@ -131,6 +150,14 @@ export default function AddJobModal({
                           max="7"
                           onChange={e => setJobSalary(e.target.value)}
                         />
+                        <label
+                          className="block mt-2 text-red-500 text-xs font-medium text-gray-900 dark:text-gray-300"
+                          style={{
+                            display: jobSalaryFail === true ? '' : 'none',
+                          }}
+                        >
+                          Job salary should be 1-8 digits long
+                        </label>
                       </div>
                       <div className="w-1/4">
                         <button
@@ -275,6 +302,25 @@ export default function AddJobModal({
                           </ul>
                         </div>
                       </div>
+                    </div>
+                    <div>
+                      <label className="block mb-2 mt-4 text-sm font-medium text-gray-900 dark:text-gray-300">
+                        Contact Email{' '}
+                      </label>
+                      <input
+                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                        required=""
+                        onChange={e => setContactEmail(e.target.value)}
+                      />
+                      <label
+                        className="block mt-2 text-red-500 text-xs font-medium text-gray-900 dark:text-gray-300"
+                        style={{
+                          display: jobSalaryFail === true ? '' : 'none',
+                        }}
+                      >
+                        Contact email should be 1-25 characters long and
+                        contain an '@' and '.'
+                      </label>
                     </div>
                   </div>
                   <button

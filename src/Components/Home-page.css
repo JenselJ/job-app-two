@@ -60,7 +60,7 @@
   align-items: center;
 }
 
-@media (max-width: 576px) {
+@media (max-width: 767px) {
   .header {
     flex-direction: column;
   }
@@ -70,12 +70,24 @@
   }
 }
 
-@media (min-width: 577px) {
+@media (min-width: 768px) {
   .header {
     flex-direction: row;
   }
 
+  .jobworm {
+    margin-left: 20px;
+  }
+
   .header-child {
     flex-direction: row;
+  }
+
+  .username {
+    margin-right: 20px;
+  }
+
+  .add-job-btn {
+    margin-right: 20px;
   }
 }

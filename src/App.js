@@ -52,6 +52,7 @@ function App() {
   const [signupShow, setSignupShow] = useState(false);
   const [loginShow, setLoginShow] = useState(false);
   const [user, setUser] = useState();
+  const [username, setUsername] = useState('');
 
   return (
     <AuthContextProvider>
@@ -68,6 +69,8 @@ function App() {
                   setLoginShow={setLoginShow}
                   auth={auth}
                   setUser={setUser}
+                  username={username}
+                  setUsername={setUsername}
                 />
                 <LandingPage
                   signupShow={signupShow}

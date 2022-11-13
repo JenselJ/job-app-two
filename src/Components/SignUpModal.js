@@ -23,6 +23,8 @@ export default function SignUpModal({
   setSignupShow,
   signupShow,
   setLoginShow,
+  username,
+  setUsername,
 }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -36,22 +38,17 @@ export default function SignUpModal({
     console.log('handle submit');
     e.preventDefault();
     setError('');
-    try {
-      await createUser(email, password, name);
-      // updateProfile(user, {
-      //   displayName: name,
-      // })
-      //   .then(() => {
-      //     console.log(user.displayName);
-      //   })
-      //   .catch(error => {
-      //     console.log(error.message);
-      //   });
-      navigate('/home');
-      // navigate to the profile screen if successful
-    } catch (error) {
-      setError(error.message);
-      alert(error.message);
+    if (username === '') {
+      alert('please input a username');
+    } else {
+      try {
+        await createUser(email, password, username);
+        navigate('/home');
+        // navigate to the profile screen if successful
+      } catch (error) {
+        setError(error.message);
+        alert(error.message);
+      }
     }
   };
 
@@ -121,7 +118,7 @@ export default function SignUpModal({
                       className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                       placeholder="Jackson Smith"
                       required=""
-                      onChange={e => setName(e.target.value)}
+                      onChange={e => setUsername(e.target.value)}
                     />
                   </div>
                   <div>

@@ -71,6 +71,7 @@ function JobCard({
       id: id,
       email: user.email,
       userId: user.uid,
+      username: user.displayName,
     }).then(data => {
       console.log(data); // JSON data parsed by `data.json()` call
       setComment('');
@@ -148,7 +149,7 @@ function JobCard({
               }}
               className="p-2"
             >
-              {comment.email} : {comment.comment}
+              {comment.username} : {comment.comment}
               <Button
                 key={comment.id}
                 onClick={() => {
@@ -246,6 +247,7 @@ function HomePage() {
   const [jobDescription, setJobDescription] = useState('');
   const [jobSalary, setJobSalary] = useState();
   const [jobSalaryUnit, setJobSalaryUnit] = useState();
+  const [contactEmail, setContactEmail] = useState();
   const [modalShow, setModalShow] = useState(false);
 
   const myRequest = new Request(`${apiUrl}/jobs`, {
@@ -313,19 +315,19 @@ function HomePage() {
     <>
       <div className="full-div">
         <header className="header sm:justify-between mt-8 flex">
-          <div className="text-center text-4xl sm:ml-8 font-bold mb-2">
+          <div className="text-center text-4xl font-bold mb-2 jobworm">
             JobWorm.net
           </div>
           <div className="header-child flex">
             <div>
-              <div className="text-center ml-2 sm:mr-8 mb-3">
-                {user.uid}
+              <div className="username text-center pt-2">
+                {user.displayName}
               </div>
             </div>
-            <div className="mx-auto sm:mr-10">
+            <div className="mx-auto">
               <button
                 type="submit"
-                className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                className="add-job-btn text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                 onClick={() => setAddJobShow(true)}
               >
                 Add Job
@@ -357,9 +359,9 @@ function HomePage() {
             </Stack>
           </Container> */}
         </header>
-        <div className="ml-10 mt-20 grid grid-cols-3">
+        <div className="w-screen mt-20 grid xl:grid-cols-3 md:grid-cols-2 grid-cols-1 min-[1536px]:grid-cols-4">
           {jobsArray.map(job => (
-            <div className="mb-20 w-96 rounded-md bg-gray-100">
+            <div className="mb-20 w-90 mx-auto">
               <JobCardTwo
                 job={job.job}
                 description={job.description}
@@ -373,6 +375,8 @@ function HomePage() {
                 getJobs={getJobs}
                 jobSalary={job.salary}
                 jobSalaryUnit={job.salaryUnit}
+                contactEmail={contactEmail}
+                setContactEmail={setContactEmail}
               />
             </div>
           ))}
@@ -408,6 +412,7 @@ function HomePage() {
           onHide={() => setAddJobShow(false)}
           setJobSalary={setJobSalary}
           setJobSalaryUnit={setJobSalaryUnit}
+          setContactEmail={setContactEmail}
         />
       </div>
     </>

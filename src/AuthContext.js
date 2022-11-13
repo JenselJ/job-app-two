@@ -15,17 +15,26 @@ const UserContext = createContext();
 export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState();
 
-  const createUser = (email, password, displayName) => {
-    return createUserWithEmailAndPassword(
-      auth,
-      email,
-      password,
-      displayName,
-    ).then(userCredential => {
-      // Signed in
-      const user = userCredential.user;
-      setUser(user);
-    });
+  const createUser = (email, password, username) => {
+    console.log('calling create user');
+    return createUserWithEmailAndPassword(auth, email, password)
+      .then(userCredential => {
+        // Signed in
+        const user = userCredential.user;
+        updateProfile(user, {
+          displayName: username,
+        });
+        return user;
+      })
+      .then(user => {
+        setUser(user);
+      })
+      .catch(error => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        alert(errorMessage);
+        // ..
+      });
   };
 
   const signIn = (email, password) => {

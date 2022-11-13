@@ -1,0 +1,11 @@
+@media (max-width: 767px) {
+  .post-btn {
+    margin-top: 8px;
+  }
+}
+
+@media (min-width: 768px) {
+  .post-btn {
+    margin-top: 0px;
+  }
+}
