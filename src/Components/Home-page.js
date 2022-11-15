@@ -11,6 +11,7 @@ import homeBg from '../home-bg.jpg';
 import { UserAuth } from '../AuthContext';
 import { uid } from 'react-uid';
 import JobCardTwo from './JobCard';
+import { useNavigate } from 'react-router-dom';
 
 // const apiUrl = 'https://job-app-backend-sunny.herokuapp.com'
 
@@ -168,13 +169,12 @@ function JobCard({
   );
 }
 
-function HomePage() {
+function HomePage({ username }) {
   const [commentsJobsArray, setCommentsJobsArray] = useState([]);
   const [jobsArray, setJobsArray] = useState([]);
-  const { user } = UserAuth();
+  const { user, logout } = UserAuth();
 
   const [addJobShow, setAddJobShow] = useState(false);
-
   useEffect(() => {
     getJobs();
     console.log('use effect');
@@ -249,6 +249,22 @@ function HomePage() {
   const [jobSalaryUnit, setJobSalaryUnit] = useState();
   const [contactEmail, setContactEmail] = useState();
   const [modalShow, setModalShow] = useState(false);
+  const [jobNameFail, setJobNameFail] = useState(false);
+  const [jobDescriptionFail, setJobDescriptionFail] = useState(false);
+  const [jobSalaryFail, setJobSalaryFail] = useState(false);
+  const [contactEmailFail, setContactEmailFail] = useState(false);
+
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+      navigate('/');
+      console.log('You are logged out');
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 
   const myRequest = new Request(`${apiUrl}/jobs`, {
     method: 'GET',
@@ -266,23 +282,70 @@ function HomePage() {
       });
   }
 
+  function displayName() {
+    if (user.displayName) {
+      return <div>{user.displayName}</div>;
+    } else {
+      return <div>{username}</div>;
+    }
+  }
+
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(jobSalary, jobSalaryUnit);
-    postData(`${apiUrl}/jobs`, {
-      job: jobTitle,
-      description: jobDescription,
-      salary: jobSalary,
-      salaryUnit: jobSalaryUnit,
-      email: user.email,
-      userId: user.uid,
-    }).then(data => {
-      console.log(data);
-      getJobs(); // JSON data parsed by `data.json()` call
-    });
-    setAddJobShow(false);
-    setJobTitle('');
-    setJobDescription('');
+    if (jobTitle === '' || jobTitle.length > 30) {
+      setJobNameFail(true);
+    } else {
+      setJobNameFail(false);
+    }
+    if (jobDescription.length > 200) {
+      setJobDescriptionFail(true);
+    } else {
+      setJobDescriptionFail(false);
+    }
+    if (jobSalary.length > 8 || isNaN(jobSalary) === true) {
+      setJobSalaryFail(true);
+    } else {
+      setJobSalaryFail(false);
+    }
+    if (
+      contactEmail === '' ||
+      contactEmail.length > 25 ||
+      contactEmail.includes('@') === false ||
+      contactEmail.includes('.') === false
+    ) {
+      setContactEmailFail(true);
+    } else {
+      setContactEmailFail(false);
+    }
+
+    if (
+      jobTitle !== '' &&
+      jobTitle.length < 31 &&
+      jobDescription.length < 201 &&
+      jobSalary.length < 9 &&
+      isNaN(jobSalary) === false &&
+      contactEmail.length < 26 &&
+      contactEmail !== '' &&
+      contactEmail.includes('@') === true &&
+      contactEmail.includes('.') === true
+    ) {
+      console.log(jobSalary, jobSalaryUnit);
+      postData(`${apiUrl}/jobs`, {
+        job: jobTitle,
+        description: jobDescription,
+        salary: jobSalary,
+        salaryUnit: jobSalaryUnit,
+        email: user.email,
+        userId: user.uid,
+        contactEmail: contactEmail,
+      }).then(data => {
+        console.log(data);
+        getJobs(); // JSON data parsed by `data.json()` call
+      });
+      setAddJobShow(false);
+      setJobTitle('');
+      setJobDescription('');
+    }
   }
 
   // const app = express();
@@ -319,10 +382,18 @@ function HomePage() {
             JobWorm.net
           </div>
           <div className="header-child flex">
-            <div>
+            <div className="flex">
               <div className="username text-center pt-2">
-                {user.displayName}
+                {displayName()}
               </div>
+              <button
+                className="text-sm text-gray-400 cursor-pointer hover:opacity-75 duration-150 text-sm sm:text-md text-center pb-2 mr-20"
+                onClick={() => {
+                  handleLogout();
+                }}
+              >
+                Log out
+              </button>
             </div>
             <div className="mx-auto">
               <button
@@ -375,7 +446,7 @@ function HomePage() {
                 getJobs={getJobs}
                 jobSalary={job.salary}
                 jobSalaryUnit={job.salaryUnit}
-                contactEmail={contactEmail}
+                contactEmail={job.contactEmail}
                 setContactEmail={setContactEmail}
               />
             </div>
@@ -413,6 +484,14 @@ function HomePage() {
           setJobSalary={setJobSalary}
           setJobSalaryUnit={setJobSalaryUnit}
           setContactEmail={setContactEmail}
+          jobTitle={jobTitle}
+          jobDescription={jobDescription}
+          jobSalary={jobSalary}
+          contactEmail={contactEmail}
+          jobNameFail={jobNameFail}
+          jobDescriptionFail={jobDescriptionFail}
+          jobSalaryFail={jobSalaryFail}
+          contactEmailFail={contactEmailFail}
         />
       </div>
     </>

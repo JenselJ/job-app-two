@@ -21,7 +21,7 @@ import LogInModal from './Components/LogInModal';
 import SignUpModal from './Components/SignUpModal';
 import HomePage from './Components/Home-page';
 import { AuthContextProvider } from './AuthContext';
-import ResetPasswordModal from './Components/ResetPassword.js';
+import ResetPassword from './Components/ResetPassword.js';
 import RequireAuth from './AuthContext';
 
 // Import the functions you need from the SDKs you need
@@ -53,6 +53,7 @@ function App() {
   const [loginShow, setLoginShow] = useState(false);
   const [user, setUser] = useState();
   const [username, setUsername] = useState('');
+  const [resetPasswordShow, setResetPasswordShow] = useState(false);
 
   return (
     <AuthContextProvider>
@@ -84,7 +85,14 @@ function App() {
                   setLoginShow={setLoginShow}
                   setSignupShow={setSignupShow}
                   auth={auth}
+                  setResetPasswordShow={setResetPasswordShow}
                   // setUser={setUser}
+                />
+                <ResetPassword
+                  setLoginShow={setLoginShow}
+                  auth={auth}
+                  setResetPasswordShow={setResetPasswordShow}
+                  resetPasswordShow={resetPasswordShow}
                 />
               </>
             }
@@ -94,14 +102,9 @@ function App() {
             path="/home"
             element={
               // <RequireAuth>
-              <HomePage />
+              <HomePage username={username} />
               // </RequireAuth>
             }
-          />
-          <Route
-            exact
-            path="/resetpassword"
-            element={<ResetPasswordModal />}
           />
         </Routes>
       </Router>

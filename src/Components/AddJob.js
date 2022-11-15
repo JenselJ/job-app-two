@@ -13,11 +13,17 @@ export default function AddJobModal({
   setJobSalary,
   setJobSalaryUnit,
   setContactEmail,
+  jobTitle,
+  jobDescription,
+  jobSalary,
+  contactEmail,
+  jobNameFail,
+  jobDescriptionFail,
+  jobSalaryFail,
+  contactEmailFail,
 }) {
   const [dropdownShow, setDropdownShow] = useState(false);
-  const [jobNameFail, setJobNameFail] = useState(false);
-  const [jobDescriptionFail, setJobDescriptionFail] = useState(false);
-  const [jobSalaryFail, setJobSalaryFail] = useState(false);
+  const [jobSalaryUnitDisplay, setJobSalaryUnitDisplay] = useState('per');
 
   function dropdownVisiblity() {
     console.log('dropdown visiblity triggered');
@@ -28,6 +34,49 @@ export default function AddJobModal({
     }
     console.log(dropdownShow);
   }
+
+  // function submitButton() {
+  //   // e.preventDefault();
+  //   if (jobTitle === '' || jobTitle.length > 30) {
+  //     setJobNameFail(true);
+  //   } else {
+  //     setJobNameFail(false);
+  //   }
+  //   if (jobDescription.length > 200) {
+  //     setJobDescriptionFail(true);
+  //   } else {
+  //     setJobDescriptionFail(false);
+  //   }
+  //   if (jobSalary.length > 8 || isNaN(jobSalary) === true) {
+  //     setJobSalaryFail(true);
+  //   } else {
+  //     setJobSalaryFail(false);
+  //   }
+  //   if (
+  //     contactEmail === '' ||
+  //     contactEmail.length > 25 ||
+  //     contactEmail.includes('@') === false ||
+  //     contactEmail.includes('.') === false
+  //   ) {
+  //     setContactEmailFail(true);
+  //   } else {
+  //     setContactEmailFail(false);
+  //   }
+
+  //   if (
+  //     jobTitle !== '' &&
+  //     jobTitle.length < 31 &&
+  //     jobDescription.length < 201 &&
+  //     jobSalary.length < 9 &&
+  //     isNaN(jobSalary) === false &&
+  //     contactEmail.length < 26 &&
+  //     contactEmail !== '' &&
+  //     contactEmail.includes('@') === true &&
+  //     contactEmail.includes('.') === true
+  //   ) {
+  //     handleSubmit();
+  //   }
+  // }
 
   return (
     // <Modal
@@ -145,9 +194,6 @@ export default function AddJobModal({
                         <input
                           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                           required=""
-                          type="number"
-                          min="1"
-                          max="7"
                           onChange={e => setJobSalary(e.target.value)}
                         />
                         <label
@@ -167,7 +213,7 @@ export default function AddJobModal({
                           type="button"
                           onClick={dropdownVisiblity}
                         >
-                          per{' '}
+                          {jobSalaryUnitDisplay}
                           <svg
                             className="ml-2 w-4 h-4"
                             aria-hidden="true"
@@ -202,17 +248,19 @@ export default function AddJobModal({
                             <li>
                               <div className="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
                                 <input
-                                  id="default-radio-4"
+                                  id="default-radio-1"
                                   type="radio"
                                   value=""
                                   name="default-radio"
                                   className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                                   onClick={() => {
                                     setJobSalaryUnit('/hr');
+                                    dropdownVisiblity();
+                                    setJobSalaryUnitDisplay('/hr');
                                   }}
                                 />
                                 <label
-                                  for="default-radio-4"
+                                  for="default-radio-1"
                                   className="ml-2 w-full text-sm font-medium text-gray-900 rounded dark:text-gray-300"
                                 >
                                   hour
@@ -222,17 +270,19 @@ export default function AddJobModal({
                             <li>
                               <div className="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
                                 <input
-                                  id="default-radio-4"
+                                  id="default-radio-2"
                                   type="radio"
                                   value=""
                                   name="default-radio"
                                   onClick={() => {
                                     setJobSalaryUnit('/day');
+                                    dropdownVisiblity();
+                                    setJobSalaryUnitDisplay('/day');
                                   }}
                                   className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                                 />
                                 <label
-                                  for="default-radio-4"
+                                  for="default-radio-2"
                                   className="ml-2 w-full text-sm font-medium text-gray-900 rounded dark:text-gray-300"
                                 >
                                   day
@@ -242,17 +292,19 @@ export default function AddJobModal({
                             <li>
                               <div className="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
                                 <input
-                                  id="default-radio-6"
+                                  id="default-radio-3"
                                   type="radio"
                                   value=""
                                   name="default-radio"
                                   onClick={() => {
                                     setJobSalaryUnit('/wk');
+                                    dropdownVisiblity();
+                                    setJobSalaryUnitDisplay('/wk');
                                   }}
                                   className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                                 />
                                 <label
-                                  for="default-radio-6"
+                                  for="default-radio-3"
                                   className="ml-2 w-full text-sm font-medium text-gray-900 rounded dark:text-gray-300"
                                 >
                                   week
@@ -262,17 +314,19 @@ export default function AddJobModal({
                             <li>
                               <div className="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
                                 <input
-                                  id="default-radio-6"
+                                  id="default-radio-4"
                                   type="radio"
                                   value=""
                                   name="default-radio"
                                   onClick={() => {
                                     setJobSalaryUnit('/mo');
+                                    dropdownVisiblity();
+                                    setJobSalaryUnitDisplay('/mo');
                                   }}
                                   className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                                 />
                                 <label
-                                  for="default-radio-6"
+                                  for="default-radio-4"
                                   className="ml-2 w-full text-sm font-medium text-gray-900 rounded dark:text-gray-300"
                                 >
                                   month
@@ -282,17 +336,19 @@ export default function AddJobModal({
                             <li>
                               <div className="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
                                 <input
-                                  id="default-radio-6"
+                                  id="default-radio-5"
                                   type="radio"
                                   value=""
                                   name="default-radio"
                                   onClick={() => {
                                     setJobSalaryUnit('/yr');
+                                    dropdownVisiblity();
+                                    setJobSalaryUnitDisplay('/yr');
                                   }}
                                   className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                                 />
                                 <label
-                                  for="default-radio-6"
+                                  for="default-radio-5"
                                   className="ml-2 w-full text-sm font-medium text-gray-900 rounded dark:text-gray-300"
                                 >
                                   year
@@ -315,7 +371,7 @@ export default function AddJobModal({
                       <label
                         className="block mt-2 text-red-500 text-xs font-medium text-gray-900 dark:text-gray-300"
                         style={{
-                          display: jobSalaryFail === true ? '' : 'none',
+                          display: contactEmailFail === true ? '' : 'none',
                         }}
                       >
                         Contact email should be 1-25 characters long and
@@ -324,7 +380,6 @@ export default function AddJobModal({
                     </div>
                   </div>
                   <button
-                    type="submit"
                     className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                     onClick={handleSubmit}
                   >

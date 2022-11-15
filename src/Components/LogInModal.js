@@ -20,6 +20,7 @@ export default function LogInModal({
   setLoginShow,
   loginShow,
   setSignupShow,
+  setResetPasswordShow,
 }) {
   const navigate = useNavigate();
 
@@ -52,6 +53,11 @@ export default function LogInModal({
       alert(error.message);
       console.error(error);
     }
+  };
+
+  const handleResetPassword = () => {
+    setLoginShow(false);
+    setResetPasswordShow(true);
   };
 
   function createAccount() {
@@ -129,6 +135,9 @@ export default function LogInModal({
                     <a
                       href="#"
                       className="text-sm text-blue-700 hover:underline dark:text-blue-500"
+                      onClick={() => {
+                        handleResetPassword();
+                      }}
                     >
                       Forgot Password?
                     </a>

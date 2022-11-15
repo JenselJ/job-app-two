@@ -28,12 +28,6 @@ export const AuthContextProvider = ({ children }) => {
       })
       .then(user => {
         setUser(user);
-      })
-      .catch(error => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        alert(errorMessage);
-        // ..
       });
   };
 
@@ -60,9 +54,20 @@ export const AuthContextProvider = ({ children }) => {
       });
   };
 
+  const logout = () => {
+    return signOut(auth);
+  };
+
   return (
     <UserContext.Provider
-      value={{ createUser, signIn, resetPassword, user, RequireAuth }}
+      value={{
+        createUser,
+        signIn,
+        resetPassword,
+        user,
+        RequireAuth,
+        logout,
+      }}
     >
       {children}
     </UserContext.Provider>
