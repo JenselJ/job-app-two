@@ -13,7 +13,9 @@ import { uid } from 'react-uid';
 import JobCardTwo from './JobCard';
 import { useNavigate } from 'react-router-dom';
 
-const apiUrl = 'https://job-app-backend.onrender.com';
+// const apiUrl = 'https://job-app-backend.onrender.com';
+
+const apiUrl = 'http://localhost:5000';
 
 // const apiUrl = 'https://git.heroku.com/job-app-backend-sunny.git';
 
@@ -248,8 +250,10 @@ function HomePage({ username }) {
   const [jobSalary, setJobSalary] = useState();
   const [jobSalaryUnit, setJobSalaryUnit] = useState();
   const [contactEmail, setContactEmail] = useState();
+  const [companyName, setCompanyName] = useState();
   const [modalShow, setModalShow] = useState(false);
   const [jobNameFail, setJobNameFail] = useState(false);
+  const [companyNameFail, setCompanyNameFail] = useState(false);
   const [jobDescriptionFail, setJobDescriptionFail] = useState(false);
   const [jobSalaryFail, setJobSalaryFail] = useState(false);
   const [contactEmailFail, setContactEmailFail] = useState(false);
@@ -297,6 +301,11 @@ function HomePage({ username }) {
     } else {
       setJobNameFail(false);
     }
+    if (companyName === '' || companyName.length > 20) {
+      setCompanyNameFail(true);
+    } else {
+      setCompanyNameFail(false);
+    }
     if (jobDescription.length > 200) {
       setJobDescriptionFail(true);
     } else {
@@ -321,6 +330,8 @@ function HomePage({ username }) {
     if (
       jobTitle !== '' &&
       jobTitle.length < 31 &&
+      companyName !== '' &&
+      companyName.length < 21 &&
       jobDescription.length < 201 &&
       jobSalary.length < 9 &&
       isNaN(jobSalary) === false &&
@@ -338,6 +349,7 @@ function HomePage({ username }) {
         email: user.email,
         userId: user.uid,
         contactEmail: contactEmail,
+        companyName: companyName,
       }).then(data => {
         console.log(data);
         getJobs(); // JSON data parsed by `data.json()` call
@@ -345,6 +357,7 @@ function HomePage({ username }) {
       setAddJobShow(false);
       setJobTitle('');
       setJobDescription('');
+      setCompanyName('');
     }
   }
 
@@ -447,9 +460,9 @@ function HomePage({ username }) {
           </Container> */}
         </header>
         <div className="flex w-screen">
-          <div className="w-1/2 mt-20 grid grid-cols-1 min-[1536px]:grid-cols-4">
+          <div className="w-1/2 mt-20 grid grid-cols-1">
             {jobsArray.map(job => (
-              <div className="mb-20 max-w-90 mx-auto">
+              <div className="mb-10 max-w-90 mx-auto">
                 <JobCardTwo
                   job={job.job}
                   description={job.description}
@@ -505,6 +518,8 @@ function HomePage({ username }) {
           setJobSalaryUnit={setJobSalaryUnit}
           setContactEmail={setContactEmail}
           jobTitle={jobTitle}
+          companyName={companyName}
+          setCompanyName={setCompanyName}
           jobDescription={jobDescription}
           jobSalary={jobSalary}
           contactEmail={contactEmail}

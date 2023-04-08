@@ -5,7 +5,9 @@ import './JobCard.css';
 import money from '../assets/money.png';
 import briefcase from '../assets/briefcase.png';
 
-const apiUrl = 'https://job-app-backend-sunny.herokuapp.com';
+// const apiUrl = 'https://job-app-backend.onrender.com';
+
+const apiUrl = 'http://localhost:5000';
 
 // const apiUrl = 'https://git.heroku.com/job-app-backend-sunny.git';
 
@@ -23,6 +25,7 @@ export default function JobCardTwo({
   jobSalary,
   jobSalaryUnit,
   contactEmail,
+  companyName,
 }) {
   const { user } = UserAuth();
 
@@ -104,7 +107,7 @@ export default function JobCardTwo({
 
   return (
     <>
-      <div className="max-w-sm p-3 rounded-xl jobcard">
+      <div className="p-3 rounded-xl jobcard">
         <div>
           <div className="flex flex-row justify-between">
             <h5 className="job-title text-xl max-w-xs font-semibold tracking-tight text-gray-900 dark:text-white">
@@ -127,12 +130,15 @@ export default function JobCardTwo({
               </button>
             </div> */}
           </div>
-          <div>GUCCI Australia</div>
+          <div>{companyName}</div>
           <div>Sydney</div>
           <div className="flex">
             <div className="text-sm font-semibold bg-gray-100 px-2 rounded-md w-fit flex mt-2 mr-2">
               <img src={money} className="icons mr-1" />
-              <div>$25 an hour</div>
+              <div>
+                {currencyFormatter.format(jobSalary)}
+                {jobSalaryUnit}
+              </div>
             </div>
             <div className="text-sm font-semibold bg-gray-100 px-2 rounded-md w-fit flex mt-2">
               <img src={briefcase} className="icons mr-1" />
@@ -140,8 +146,10 @@ export default function JobCardTwo({
             </div>
           </div>
 
-          <h6 className="job-desc mt-4">{description}</h6>
-          <div className="mt-3">Contact email: {contactEmail}</div>
+          <h6 className="job-desc mt-4 text-gray-600">{description}</h6>
+          <div className="mt-3 text-sm text-gray-600">
+            Contact email: {contactEmail}
+          </div>
           {/* <div className="flex items-center justify-between mt-4">
             <span className="text-2xl font-semibold text-gray-900 dark:text-white">
               {currencyFormatter.format(jobSalary)}

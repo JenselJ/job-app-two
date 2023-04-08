@@ -8,6 +8,7 @@
 
 .jobcard {
   border: 1px solid lightgray;
+  width: 400px;
 }
 
 .job-desc {

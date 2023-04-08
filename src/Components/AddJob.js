@@ -21,6 +21,9 @@ export default function AddJobModal({
   jobDescriptionFail,
   jobSalaryFail,
   contactEmailFail,
+  companyName,
+  setCompanyName,
+  companyNameFail,
 }) {
   const [dropdownShow, setDropdownShow] = useState(false);
   const [jobSalaryUnitDisplay, setJobSalaryUnitDisplay] = useState('per');
@@ -162,6 +165,24 @@ export default function AddJobModal({
                       }}
                     >
                       Job name should be 1-30 characters long
+                    </label>
+                  </div>
+                  <div>
+                    <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                      Company
+                    </label>
+                    <input
+                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                      required=""
+                      onChange={e => setCompanyName(e.target.value)}
+                    />
+                    <label
+                      className="block mt-2 text-red-500 text-xs font-medium text-gray-900 dark:text-gray-300"
+                      style={{
+                        display: companyNameFail === true ? '' : 'none',
+                      }}
+                    >
+                      Company name should be 1-20 characters long
                     </label>
                   </div>
                   <div>
