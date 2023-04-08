@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { UserAuth } from '../AuthContext';
 import { currencyFormatter } from './utils';
 import './JobCard.css';
+import money from '../assets/money.png';
+import briefcase from '../assets/briefcase.png';
 
 const apiUrl = 'https://job-app-backend-sunny.herokuapp.com';
 
@@ -127,9 +129,15 @@ export default function JobCardTwo({
           </div>
           <div>GUCCI Australia</div>
           <div>Sydney</div>
-          <div className="text-sm bg-gray-100 px-2 rounded-md w-fit">
-            <div></div>
-            <div>$25 an hour</div>
+          <div className="flex">
+            <div className="text-sm font-semibold bg-gray-100 px-2 rounded-md w-fit flex mt-2 mr-2">
+              <img src={money} className="icons mr-1" />
+              <div>$25 an hour</div>
+            </div>
+            <div className="text-sm font-semibold bg-gray-100 px-2 rounded-md w-fit flex mt-2">
+              <img src={briefcase} className="icons mr-1" />
+              <div>Full-time</div>
+            </div>
           </div>
 
           <h6 className="job-desc mt-4">{description}</h6>

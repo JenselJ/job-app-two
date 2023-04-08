@@ -2,6 +2,10 @@
   overflow-wrap: anywhere;
 }
 
+.icons {
+  width: 20px;
+}
+
 .jobcard {
   border: 1px solid lightgray;
 }
