@@ -25,9 +25,9 @@ export default function LandingPage({
                 Find your work, share your joy
               </h1>
               <p className="text-lg">
-                The art of hosting is rooted in thoughtful design. Share
-                your unique aesthetic with guests and earn extra income on
-                a schedule that works for you.
+                Finding a meaningful career can be one of the biggest
+                challenges in our lives. Sign up with JobWorm and we'll
+                help maek your first steps as easy and rewarding as can be.
               </p>
               <div>
                 <button
@@ -56,9 +56,9 @@ export default function LandingPage({
         </div>
       </div>
 
-      <div className="px-8 py-16">
-        <div className="max-w-md mb-16">
-          <h2 className="text-5xl">
+      <div className="px-12 py-16">
+        <div className="mb-16">
+          <h2 className="text-5xl font-semibold">
             Your next chapter, made possible by JobWorm
           </h2>
         </div>
@@ -67,16 +67,17 @@ export default function LandingPage({
           <div>
             <h3 className="text-2xl font-bold mb-2">Find what you love</h3>
             <p className="text-lg">
-              Indulge your love for design when you host Airbnb guests, who
-              are drawn to authentic travel in creatively curated spaces.
+              Find jobs in industries that you love, with passionate
+              workers who share your interests and understand your joy.
             </p>
           </div>
 
           <div>
             <h3 className="text-2xl font-bold mb-2">Make a difference</h3>
             <p className="text-lg">
-              You have 80000 hours in your career. How can you best use
-              them to help solve what you find most important?{' '}
+              The average person has 80000 hours in their career. How can
+              you best use your time to help solve what you find most
+              important?{' '}
             </p>
           </div>
         </div>

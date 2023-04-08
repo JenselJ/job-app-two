@@ -44,6 +44,10 @@
   color: #828080;
 }
 
+.nav-btn:hover {
+  border-bottom: 2px solid blue;
+}
+
 .comment-div {
   display: flex;
   align-items: center;
@@ -58,6 +62,10 @@
 .comment-button {
   display: flex;
   align-items: center;
+}
+
+.header {
+  border-bottom: 1px solid lightgray;
 }
 
 @media (max-width: 767px) {

@@ -1,3 +1,15 @@
+.job-title {
+  overflow-wrap: anywhere;
+}
+
+.jobcard {
+  border: 1px solid lightgray;
+}
+
+.job-desc {
+  overflow-wrap: anywhere;
+}
+
 @media (max-width: 767px) {
   .post-btn {
     margin-top: 8px;

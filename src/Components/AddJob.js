@@ -196,15 +196,8 @@ export default function AddJobModal({
                           required=""
                           onChange={e => setJobSalary(e.target.value)}
                         />
-                        <label
-                          className="block mt-2 text-red-500 text-xs font-medium text-gray-900 dark:text-gray-300"
-                          style={{
-                            display: jobSalaryFail === true ? '' : 'none',
-                          }}
-                        >
-                          Job salary should be 1-8 digits long
-                        </label>
                       </div>
+
                       <div className="w-1/4">
                         <button
                           id="dropdownRadioBgHoverButton"
@@ -359,6 +352,15 @@ export default function AddJobModal({
                         </div>
                       </div>
                     </div>
+                    <label
+                      className="block mt-2 text-red-500 text-xs font-medium text-gray-900 dark:text-gray-300"
+                      style={{
+                        display: jobSalaryFail === true ? '' : 'none',
+                      }}
+                    >
+                      Job salary should be 1-8 digits long and only contain
+                      numbers
+                    </label>
                     <div>
                       <label className="block mb-2 mt-4 text-sm font-medium text-gray-900 dark:text-gray-300">
                         Contact Email{' '}

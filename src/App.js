@@ -101,9 +101,9 @@ function App() {
             exact
             path="/home"
             element={
-              // <RequireAuth>
-              <HomePage username={username} />
-              // </RequireAuth>
+              <RequireAuth>
+                <HomePage username={username} />
+              </RequireAuth>
             }
           />
         </Routes>

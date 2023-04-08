@@ -13,9 +13,9 @@ import { uid } from 'react-uid';
 import JobCardTwo from './JobCard';
 import { useNavigate } from 'react-router-dom';
 
-// const apiUrl = 'https://job-app-backend-sunny.herokuapp.com'
+const apiUrl = 'https://job-app-backend.onrender.com';
 
-const apiUrl = 'http://localhost:4200';
+// const apiUrl = 'https://git.heroku.com/job-app-backend-sunny.git';
 
 function JobCard({
   job,
@@ -268,7 +268,7 @@ function HomePage({ username }) {
 
   const myRequest = new Request(`${apiUrl}/jobs`, {
     method: 'GET',
-    headers: myHeaders,
+    headers: { myHeaders, 'Content-Type': 'application/json' },
     mode: 'cors',
     cache: 'default',
   });
@@ -382,7 +382,23 @@ function HomePage({ username }) {
             JobWorm.net
           </div>
           <div className="header-child flex">
-            <div className="flex">
+            <div className="mr-8">{displayName()}</div>
+            <div
+              className="nav-btn mr-8 text-blue-600 cursor-pointer hover:opacity-75 duration-150 sm:text-md text-center"
+              onClick={() => setAddJobShow(true)}
+            >
+              Add Job
+            </div>
+            <div
+              className="nav-btn mr-8 text-blue-600 cursor-pointer hover:opacity-75 duration-150 sm:text-md text-center"
+              onClick={() => {
+                handleLogout();
+              }}
+            >
+              Log out
+            </div>
+
+            {/* <div className="flex">
               <div className="username text-center pt-2">
                 {displayName()}
               </div>
@@ -403,7 +419,7 @@ function HomePage({ username }) {
               >
                 Add Job
               </button>
-            </div>
+            </div> */}
           </div>
 
           {/* <Container>
@@ -430,30 +446,31 @@ function HomePage({ username }) {
             </Stack>
           </Container> */}
         </header>
-        <div className="w-screen mt-20 grid xl:grid-cols-3 md:grid-cols-2 grid-cols-1 min-[1536px]:grid-cols-4">
-          {jobsArray.map(job => (
-            <div className="mb-20 w-90 mx-auto">
-              <JobCardTwo
-                job={job.job}
-                description={job.description}
-                id={job.id}
-                comments={job.comments}
-                email={job.email}
-                userId={job.userId}
-                commentsJobsArray={commentsJobsArray}
-                setCommentsJobsArray={setCommentsJobsArray}
-                getComments={getComments}
-                getJobs={getJobs}
-                jobSalary={job.salary}
-                jobSalaryUnit={job.salaryUnit}
-                contactEmail={job.contactEmail}
-                setContactEmail={setContactEmail}
-              />
-            </div>
-          ))}
+        <div className="flex w-screen">
+          <div className="w-1/2 mt-20 grid grid-cols-1 min-[1536px]:grid-cols-4">
+            {jobsArray.map(job => (
+              <div className="mb-20 max-w-90 mx-auto">
+                <JobCardTwo
+                  job={job.job}
+                  description={job.description}
+                  id={job.id}
+                  comments={job.comments}
+                  email={job.email}
+                  userId={job.userId}
+                  commentsJobsArray={commentsJobsArray}
+                  setCommentsJobsArray={setCommentsJobsArray}
+                  getComments={getComments}
+                  getJobs={getJobs}
+                  jobSalary={job.salary}
+                  jobSalaryUnit={job.salaryUnit}
+                  contactEmail={job.contactEmail}
+                  setContactEmail={setContactEmail}
+                />
+              </div>
+            ))}
 
-          {console.log(jobsArray)}
-          {/* <div className="job-container-container">
+            {console.log(jobsArray)}
+            {/* <div className="job-container-container">
             <div className="job-container">
               {jobsArray.map(job => (
                 <div className="job-cards">
@@ -473,7 +490,10 @@ function HomePage({ username }) {
               ))}
             </div>
           </div> */}
+          </div>
+          <div className="w-1/2"></div>
         </div>
+
         <AddJobModal
           handleSubmit={handleSubmit}
           setJobTitle={setJobTitle}

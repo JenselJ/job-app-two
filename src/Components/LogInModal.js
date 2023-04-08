@@ -36,6 +36,7 @@ export default function LogInModal({
     setError('');
     try {
       await signIn(email, password);
+      setLoginShow(false);
       navigate('/home');
     } catch (error) {
       setError(error.message);

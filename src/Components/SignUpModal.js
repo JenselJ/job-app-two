@@ -58,6 +58,7 @@ export default function SignUpModal({
       setError('');
       try {
         await createUser(email, password, username);
+        setSignupShow(false);
         navigate('/home');
         // navigate to the profile screen if successful
       } catch (error) {
