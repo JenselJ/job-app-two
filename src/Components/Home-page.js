@@ -478,6 +478,8 @@ function HomePage({ username }) {
                   jobSalaryUnit={job.salaryUnit}
                   contactEmail={job.contactEmail}
                   setContactEmail={setContactEmail}
+                  companyName={job.companyName}
+                  setCompanyName={setCompanyName}
                 />
               </div>
             ))}
