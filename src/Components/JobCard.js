@@ -26,6 +26,7 @@ export default function JobCardTwo({
   jobSalaryUnit,
   contactEmail,
   companyName,
+  location,
 }) {
   const { user } = UserAuth();
 
@@ -110,7 +111,7 @@ export default function JobCardTwo({
       <div className="p-3 rounded-xl jobcard">
         <div>
           <div className="flex flex-row justify-between">
-            <h5 className="job-title text-xl max-w-xs font-semibold tracking-tight text-gray-900 dark:text-white">
+            <h5 className="capitalize job-title text-xl max-w-xs font-semibold tracking-tight text-gray-900 dark:text-white">
               {job}{' '}
             </h5>
             {/* <div>
@@ -130,8 +131,8 @@ export default function JobCardTwo({
               </button>
             </div> */}
           </div>
-          <div>{companyName}</div>
-          <div>Sydney</div>
+          <div className="capitalize">{companyName}</div>
+          <div className="capitalize">{location}</div>
           <div className="flex">
             <div className="text-sm font-semibold bg-gray-100 px-2 rounded-md w-fit flex mt-2 mr-2">
               <img src={money} className="icons mr-1" />

@@ -24,8 +24,14 @@ export default function AddJobModal({
   companyName,
   setCompanyName,
   companyNameFail,
+  setLocation,
+  locationFail,
+  jobType,
+  setJobType,
 }) {
   const [dropdownShow, setDropdownShow] = useState(false);
+  const [dropdownTwoShow, setDropdownTwoShow] = useState(false);
+
   const [jobSalaryUnitDisplay, setJobSalaryUnitDisplay] = useState('per');
 
   function dropdownVisiblity() {
@@ -36,6 +42,16 @@ export default function AddJobModal({
       setDropdownShow(false);
     }
     console.log(dropdownShow);
+  }
+
+  function dropdownTwoVisiblity() {
+    console.log('dropdownTwo visiblity triggered');
+    if (dropdownTwoShow === false) {
+      setDropdownTwoShow(true);
+    } else if (dropdownTwoShow === true) {
+      setDropdownTwoShow(false);
+    }
+    console.log(dropdownTwoShow);
   }
 
   // function submitButton() {
@@ -183,6 +199,24 @@ export default function AddJobModal({
                       }}
                     >
                       Company name should be 1-20 characters long
+                    </label>
+                  </div>
+                  <div>
+                    <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                      Location
+                    </label>
+                    <input
+                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                      required=""
+                      onChange={e => setLocation(e.target.value)}
+                    />
+                    <label
+                      className="block mt-2 text-red-500 text-xs font-medium text-gray-900 dark:text-gray-300"
+                      style={{
+                        display: locationFail === true ? '' : 'none',
+                      }}
+                    >
+                      Location name should be 1-20 characters long
                     </label>
                   </div>
                   <div>
@@ -373,6 +407,7 @@ export default function AddJobModal({
                         </div>
                       </div>
                     </div>
+
                     <label
                       className="block mt-2 text-red-500 text-xs font-medium text-gray-900 dark:text-gray-300"
                       style={{
@@ -382,6 +417,26 @@ export default function AddJobModal({
                       Job salary should be 1-8 digits long and only contain
                       numbers
                     </label>
+
+                    <label className="block mb-2 mt-4 text-sm font-medium text-gray-900 dark:text-gray-300">
+                      Job Type{' '}
+                    </label>
+
+                    <div className="w-full h-10 flex rounded mt-4 border">
+                      <div className="w-1/4 jobType flex">
+                        <div className="m-auto">Full-time</div>
+                      </div>
+                      <div className="w-1/4 jobType flex">
+                        <div className="m-auto">Part-time</div>
+                      </div>
+                      <div className="w-1/4 jobType flex">
+                        <div className="m-auto">Casual</div>
+                      </div>
+                      <div className="w-1/4 flex">
+                        <div className="m-auto">Contract</div>
+                      </div>
+                    </div>
+
                     <div>
                       <label className="block mb-2 mt-4 text-sm font-medium text-gray-900 dark:text-gray-300">
                         Contact Email{' '}

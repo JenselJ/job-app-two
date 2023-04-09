@@ -4,3 +4,7 @@
   margin: 0px;
   transform: translate(177px, 335px);
 }
+
+.jobType {
+  border-right: 1px solid #dee2e6;
+}

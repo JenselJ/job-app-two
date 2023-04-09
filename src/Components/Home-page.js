@@ -248,11 +248,14 @@ function HomePage({ username }) {
   const [jobTitle, setJobTitle] = useState('');
   const [jobDescription, setJobDescription] = useState('');
   const [jobSalary, setJobSalary] = useState();
+  const [jobType, setJobType] = useState('Full-time');
   const [jobSalaryUnit, setJobSalaryUnit] = useState();
   const [contactEmail, setContactEmail] = useState();
   const [companyName, setCompanyName] = useState();
+  const [location, setLocation] = useState();
   const [modalShow, setModalShow] = useState(false);
   const [jobNameFail, setJobNameFail] = useState(false);
+  const [locationFail, setLocationFail] = useState(false);
   const [companyNameFail, setCompanyNameFail] = useState(false);
   const [jobDescriptionFail, setJobDescriptionFail] = useState(false);
   const [jobSalaryFail, setJobSalaryFail] = useState(false);
@@ -306,6 +309,11 @@ function HomePage({ username }) {
     } else {
       setCompanyNameFail(false);
     }
+    if (location === '' || location.length > 20) {
+      setLocationFail(true);
+    } else {
+      setLocationFail(false);
+    }
     if (jobDescription.length > 200) {
       setJobDescriptionFail(true);
     } else {
@@ -332,6 +340,8 @@ function HomePage({ username }) {
       jobTitle.length < 31 &&
       companyName !== '' &&
       companyName.length < 21 &&
+      location !== '' &&
+      location.length < 21 &&
       jobDescription.length < 201 &&
       jobSalary.length < 9 &&
       isNaN(jobSalary) === false &&
@@ -350,6 +360,9 @@ function HomePage({ username }) {
         userId: user.uid,
         contactEmail: contactEmail,
         companyName: companyName,
+        location: location,
+        jobType,
+        jobType,
       }).then(data => {
         console.log(data);
         getJobs(); // JSON data parsed by `data.json()` call
@@ -358,6 +371,7 @@ function HomePage({ username }) {
       setJobTitle('');
       setJobDescription('');
       setCompanyName('');
+      setLocation('');
     }
   }
 
@@ -476,10 +490,12 @@ function HomePage({ username }) {
                   getJobs={getJobs}
                   jobSalary={job.salary}
                   jobSalaryUnit={job.salaryUnit}
+                  jobType={job.jobType}
                   contactEmail={job.contactEmail}
                   setContactEmail={setContactEmail}
                   companyName={job.companyName}
                   setCompanyName={setCompanyName}
+                  location={job.location}
                 />
               </div>
             ))}
@@ -517,6 +533,7 @@ function HomePage({ username }) {
           setAddJobShow={setAddJobShow}
           onHide={() => setAddJobShow(false)}
           setJobSalary={setJobSalary}
+          setJobType={setJobType}
           setJobSalaryUnit={setJobSalaryUnit}
           setContactEmail={setContactEmail}
           jobTitle={jobTitle}
@@ -524,11 +541,16 @@ function HomePage({ username }) {
           setCompanyName={setCompanyName}
           jobDescription={jobDescription}
           jobSalary={jobSalary}
+          jobType={jobType}
           contactEmail={contactEmail}
           jobNameFail={jobNameFail}
           jobDescriptionFail={jobDescriptionFail}
           jobSalaryFail={jobSalaryFail}
           contactEmailFail={contactEmailFail}
+          setCompanyNameFail={setCompanyNameFail}
+          setLocation={setLocation}
+          locationFail={locationFail}
+          setLocationFail={setLocationFail}
         />
       </div>
     </>
