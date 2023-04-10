@@ -160,7 +160,7 @@ export default function AddJobModal({
                 </svg>
                 <span className="sr-only">Close modal</span>
               </button>
-              <div className="py-6 px-6 lg:px-8">
+              <div className="addJob py-6 px-6 lg:px-8">
                 <h3 className="mb-4 text-xl font-medium text-gray-900 dark:text-white">
                   Add a Job Listing{' '}
                 </h3>
@@ -223,18 +223,25 @@ export default function AddJobModal({
                     <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
                       Job Description{' '}
                     </label>
-                    <input
+                    {/* <input
                       className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                       required=""
                       onChange={e => setJobDescription(e.target.value)}
-                    />
+                    /> */}
+                    <textarea
+                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                      rows="10"
+                      maxLength={2000}
+                      onChange={e => setJobDescription(e.target.value)}
+                      required=""
+                    ></textarea>
                     <label
                       className="block mt-2 text-red-500 text-xs font-medium text-gray-900 dark:text-gray-300"
                       style={{
                         display: jobDescriptionFail === true ? '' : 'none',
                       }}
                     >
-                      Job description should be max 200 characters long
+                      Job description should be max 2000 characters long
                     </label>
                   </div>
                   <div>
@@ -280,7 +287,7 @@ export default function AddJobModal({
                         </button>
                         <div
                           id="dropdownRadioBgHover"
-                          className="z-10 w-48 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600 dropdown"
+                          className="mt-24 z-10 w-48 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600 dropdown"
                           style={{
                             visibility:
                               dropdownShow === true ? 'visible' : 'hidden',
@@ -423,17 +430,84 @@ export default function AddJobModal({
                     </label>
 
                     <div className="w-full h-10 flex rounded mt-4 border">
-                      <div className="w-1/4 jobType flex">
-                        <div className="m-auto">Full-time</div>
+                      <div
+                        className="w-1/4 jobType flex hover:bg-gray-400 hover:cursor-pointer"
+                        onClick={() => {
+                          setJobType('Full-time');
+                        }}
+                        style={{
+                          backgroundColor:
+                            jobType === 'Full-time' ? '#e7e7e7' : 'white',
+                        }}
+                      >
+                        <div
+                          className="m-auto"
+                          style={{
+                            fontWeight:
+                              jobType === 'Full-time' ? '600' : '',
+                          }}
+                        >
+                          Full-time
+                        </div>
                       </div>
-                      <div className="w-1/4 jobType flex">
-                        <div className="m-auto">Part-time</div>
+                      <div
+                        className="w-1/4 jobType flex hover:bg-gray-400 hover:cursor-pointer"
+                        onClick={() => {
+                          setJobType('Part-time');
+                        }}
+                        style={{
+                          backgroundColor:
+                            jobType === 'Part-time' ? '#e7e7e7' : 'white',
+                        }}
+                      >
+                        <div
+                          className="m-auto"
+                          style={{
+                            fontWeight:
+                              jobType === 'Part-time' ? '600' : '',
+                          }}
+                        >
+                          Part-time
+                        </div>
                       </div>
-                      <div className="w-1/4 jobType flex">
-                        <div className="m-auto">Casual</div>
+                      <div
+                        className="w-1/4 jobType flex hover:bg-gray-400 hover:cursor-pointer"
+                        onClick={() => {
+                          setJobType('Casual');
+                        }}
+                        style={{
+                          backgroundColor:
+                            jobType === 'Casual' ? '#e7e7e7' : 'white',
+                        }}
+                      >
+                        <div
+                          className="m-auto"
+                          style={{
+                            fontWeight: jobType === 'Casual' ? '600' : '',
+                          }}
+                        >
+                          Casual
+                        </div>
                       </div>
-                      <div className="w-1/4 flex">
-                        <div className="m-auto">Contract</div>
+                      <div
+                        className="w-1/4 flex hover:bg-gray-400 hover:cursor-pointer"
+                        onClick={() => {
+                          setJobType('Contract');
+                        }}
+                        style={{
+                          backgroundColor:
+                            jobType === 'Contract' ? '#e7e7e7' : 'white',
+                        }}
+                      >
+                        <div
+                          className="m-auto"
+                          style={{
+                            fontWeight:
+                              jobType === 'Contract' ? '600' : '',
+                          }}
+                        >
+                          Contract
+                        </div>
                       </div>
                     </div>
 

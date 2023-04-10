@@ -12,6 +12,7 @@ import { UserAuth } from '../AuthContext';
 import { uid } from 'react-uid';
 import JobCardTwo from './JobCard';
 import { useNavigate } from 'react-router-dom';
+import JobDisplay from './JobDisplay';
 
 // const apiUrl = 'https://job-app-backend.onrender.com';
 
@@ -314,7 +315,7 @@ function HomePage({ username }) {
     } else {
       setLocationFail(false);
     }
-    if (jobDescription.length > 200) {
+    if (jobDescription.length > 2000) {
       setJobDescriptionFail(true);
     } else {
       setJobDescriptionFail(false);
@@ -342,7 +343,7 @@ function HomePage({ username }) {
       companyName.length < 21 &&
       location !== '' &&
       location.length < 21 &&
-      jobDescription.length < 201 &&
+      jobDescription.length < 2001 &&
       jobSalary.length < 9 &&
       isNaN(jobSalary) === false &&
       contactEmail.length < 26 &&
@@ -361,8 +362,7 @@ function HomePage({ username }) {
         contactEmail: contactEmail,
         companyName: companyName,
         location: location,
-        jobType,
-        jobType,
+        jobType: jobType,
       }).then(data => {
         console.log(data);
         getJobs(); // JSON data parsed by `data.json()` call
@@ -522,7 +522,11 @@ function HomePage({ username }) {
             </div>
           </div> */}
           </div>
-          <div className="w-1/2"></div>
+          <div className="w-1/2">
+            <div className="jobDisplay mx-auto rounded-xl mt-20">
+              <JobDisplay />
+            </div>
+          </div>
         </div>
 
         <AddJobModal

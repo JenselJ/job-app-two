@@ -27,6 +27,7 @@ export default function JobCardTwo({
   contactEmail,
   companyName,
   location,
+  jobType,
 }) {
   const { user } = UserAuth();
 
@@ -143,11 +144,14 @@ export default function JobCardTwo({
             </div>
             <div className="text-sm font-semibold bg-gray-100 px-2 rounded-md w-fit flex mt-2">
               <img src={briefcase} className="icons mr-1" />
-              <div>Full-time</div>
+              <div>{jobType}</div>
             </div>
           </div>
 
-          <h6 className="job-desc mt-4 text-gray-600">{description}</h6>
+          <h6 className="job-desc mt-4 text-gray-600">
+            {description.slice(0, 120)}
+            {description.length > 120 ? '...' : ''}
+          </h6>
           <div className="mt-3 text-sm text-gray-600">
             Contact email: {contactEmail}
           </div>
