@@ -15,6 +15,9 @@
 
 .header-div {
   box-shadow: 0 5px 5px -5px #333;
+  border-top: 3px solid #d4d2d0;
+  border-right: 3px solid #d4d2d0;
+  border-left: 3px solid #d4d2d0;
 }
 
 ul {
@@ -27,4 +30,9 @@ ul {
 
 .jobDetails {
   overflow: scroll;
+  border: none;
+  overflow-x: hidden;
+  border-bottom: 3px solid #d4d2d0;
+  border-right: 3px solid #d4d2d0;
+  border-left: 3px solid #d4d2d0;
 }

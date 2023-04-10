@@ -523,7 +523,7 @@ function HomePage({ username }) {
           </div> */}
           </div>
           <div className="w-1/2">
-            <div className="jobDisplay mx-auto rounded-xl mt-20">
+            <div className="jobShow mx-auto rounded-xl mt-20">
               <JobDisplay />
             </div>
           </div>
