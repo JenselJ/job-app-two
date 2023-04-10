@@ -127,8 +127,15 @@ export default function JobCardTwo({
             <h5 className="capitalize job-title text-xl max-w-xs font-semibold tracking-tight text-gray-900 dark:text-white">
               {job}{' '}
             </h5>
-            <img src={minus} className="icons minus mr-1" />
-
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="24"
+              viewBox="0 96 960 960"
+              width="24"
+              className="minus"
+            >
+              <path d="M200 606v-60h560v60H200Z" />
+            </svg>
             {/* <div>
               <button
                 style={{
