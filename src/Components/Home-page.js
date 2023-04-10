@@ -13,6 +13,7 @@ import { uid } from 'react-uid';
 import JobCardTwo from './JobCard';
 import { useNavigate } from 'react-router-dom';
 import JobDisplay from './JobDisplay';
+import minus from '../assets/minus.png';
 
 // const apiUrl = 'https://job-app-backend.onrender.com';
 
@@ -261,6 +262,7 @@ function HomePage({ username }) {
   const [jobDescriptionFail, setJobDescriptionFail] = useState(false);
   const [jobSalaryFail, setJobSalaryFail] = useState(false);
   const [contactEmailFail, setContactEmailFail] = useState(false);
+  const [jobId, setJobId] = useState();
 
   const navigate = useNavigate();
 
@@ -404,11 +406,11 @@ function HomePage({ username }) {
   return (
     <>
       <div className="full-div">
-        <header className="header sm:justify-between mt-8 flex">
-          <div className="text-center text-4xl font-bold mb-2 jobworm">
+        <div className="header sm:justify-between h-20 flex">
+          <div className="text-4xl font-bold jobworm my-auto">
             JobWorm.net
           </div>
-          <div className="header-child flex">
+          <div className="header-child flex my-auto">
             <div className="mr-8">{displayName()}</div>
             <div
               className="nav-btn mr-8 text-blue-600 cursor-pointer hover:opacity-75 duration-150 sm:text-md text-center"
@@ -472,9 +474,9 @@ function HomePage({ username }) {
               </div>
             </Stack>
           </Container> */}
-        </header>
+        </div>
         <div className="flex w-screen">
-          <div className="w-1/2 mt-20 grid grid-cols-1">
+          <div className="w-1/2 mt-20 grid grid-cols-1 h-fit">
             {jobsArray.map(job => (
               <div className="mb-10 max-w-90 mx-auto">
                 <JobCardTwo
@@ -496,6 +498,8 @@ function HomePage({ username }) {
                   companyName={job.companyName}
                   setCompanyName={setCompanyName}
                   location={job.location}
+                  setJobId={setJobId}
+                  jobId={jobId}
                 />
               </div>
             ))}
@@ -524,7 +528,7 @@ function HomePage({ username }) {
           </div>
           <div className="w-1/2">
             <div className="jobShow mx-auto rounded-xl mt-20">
-              <JobDisplay />
+              <JobDisplay jobId={jobId} jobsArray={jobsArray} />
             </div>
           </div>
         </div>

@@ -4,6 +4,7 @@ import { currencyFormatter } from './utils';
 import './JobCard.css';
 import money from '../assets/money.png';
 import briefcase from '../assets/briefcase.png';
+import minus from '../assets/minus.png';
 
 // const apiUrl = 'https://job-app-backend.onrender.com';
 
@@ -28,6 +29,8 @@ export default function JobCardTwo({
   companyName,
   location,
   jobType,
+  setJobId,
+  jobId,
 }) {
   const { user } = UserAuth();
 
@@ -109,12 +112,23 @@ export default function JobCardTwo({
 
   return (
     <>
-      <div className="p-3 rounded-xl jobcard">
+      <div
+        className="p-3 rounded-xl jobcard"
+        onClick={() => {
+          setJobId(id);
+        }}
+        style={{
+          border:
+            jobId === id ? '3px solid #2557a7' : '1px solid lightgray',
+        }}
+      >
         <div>
           <div className="flex flex-row justify-between">
             <h5 className="capitalize job-title text-xl max-w-xs font-semibold tracking-tight text-gray-900 dark:text-white">
               {job}{' '}
             </h5>
+            <img src={minus} className="icons minus mr-1" />
+
             {/* <div>
               <button
                 style={{
