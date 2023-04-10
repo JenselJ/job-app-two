@@ -2,8 +2,8 @@ import './JobDisplay.css';
 
 const JobDisplay = () => {
   return (
-    <div>
-      <div className="pb-2 header-div px-4 pt-4">
+    <div className="jobDisplay">
+      <div className="pb-2 header-div h-1/4 px-4 pt-4">
         <div className="capitalize text-xl font-semibold">Maison</div>
         <div className="capitalize text-lg underline mt-2">Maison</div>
         <div className="capitalize text-lg mt-2">Japan</div>
@@ -11,10 +11,35 @@ const JobDisplay = () => {
           Apply on Company Site
         </button>
       </div>
-      <div className="px-4 pt-4 pb-4">
+      <div className="px-4 pt-4 pb-4 h-3/4 jobDetails">
         <div className="capitalize text-xl font-semibold">Job Details</div>
-        <div>$100 per day - Full-time</div>
-        <div>Job Decription</div>
+        <ul className="ml-8 mt-2">
+          <li>$100 per day</li>
+          <li>Full-time</li>
+        </ul>
+        <div className="text-md mt-3 font-semibold">Job Decription</div>
+        <div className="mt-2">
+          maison maison maison maison maison maison maison maison maison
+          maison maison maison maison maison maison maison maison maison
+          maison maison maison maison maison maison maison maison maison
+          maison maison maison maison maison maison maison maison maison
+          maison maison maison maison maison maison maison maison maison
+          maison maison maison maison maison maison maison maison maison
+          maison maison maison maison maison maison maison maison maison
+          maison maison maison maison maison maison maison maison maison
+          maison maison maison maison maison maison maison maison maison
+          maison maison maison maison maison maison maison maison maison
+          maison maison maison maison maison maison maison maison maison
+          maison maison maison maison maison maison maison maison maison
+          maison maison maison maison maison maison maison maison maison
+          maison maison maison maison maison maison maison maison maison
+          maison maison maison maison maison maison maison maison maison
+          maison maison maison maison maison maison maison maison maison
+          maison maison maison maison maison maison maison maison
+        </div>
+        <div className="mt-3 text-sm text-gray-600">
+          Contact email: maison@gmail.com
+        </div>
       </div>
     </div>
   );

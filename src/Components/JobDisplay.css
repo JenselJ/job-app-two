@@ -16,3 +16,15 @@
 .header-div {
   box-shadow: 0 5px 5px -5px #333;
 }
+
+ul {
+  list-style-type: disc;
+}
+
+.jobDisplay {
+  height: calc(100vh - 80px);
+}
+
+.jobDetails {
+  overflow: scroll;
+}
