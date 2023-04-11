@@ -132,7 +132,16 @@ export default function JobCardTwo({
               height="24"
               viewBox="0 96 960 960"
               width="24"
-              className="minus"
+              className="minus hover:cursor-pointer"
+              style={{
+                display: user.uid === userId ? 'block' : 'none',
+              }}
+              key={id}
+              onClick={() => {
+                if (user.uid === userId) {
+                  deleteJob(id);
+                }
+              }}
             >
               <path d="M200 606v-60h560v60H200Z" />
             </svg>

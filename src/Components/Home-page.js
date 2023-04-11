@@ -13,7 +13,7 @@ import { uid } from 'react-uid';
 import JobCardTwo from './JobCard';
 import { useNavigate } from 'react-router-dom';
 import JobDisplay from './JobDisplay';
-import minus from '../assets/minus.png';
+import DeleteConfirm from './DeleteConfirm';
 
 // const apiUrl = 'https://job-app-backend.onrender.com';
 
@@ -263,6 +263,7 @@ function HomePage({ username }) {
   const [jobSalaryFail, setJobSalaryFail] = useState(false);
   const [contactEmailFail, setContactEmailFail] = useState(false);
   const [jobId, setJobId] = useState();
+  const [deleteConfirmShow, setDeleteConfirmShow] = useState(false);
 
   const navigate = useNavigate();
 
@@ -559,6 +560,10 @@ function HomePage({ username }) {
           setLocation={setLocation}
           locationFail={locationFail}
           setLocationFail={setLocationFail}
+        />
+        <DeleteConfirm
+          deleteConfirmShow={deleteConfirmShow}
+          setDeleteConfirmShow={setDeleteConfirmShow}
         />
       </div>
     </>
