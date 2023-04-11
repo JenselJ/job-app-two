@@ -26,6 +26,7 @@ ul {
 
 .jobDisplay {
   height: calc(100vh - 80px);
+  margin: auto;
 }
 
 .jobDetails {

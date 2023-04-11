@@ -16,7 +16,7 @@ const JobDisplay = ({ jobsArray, jobId }) => {
   return (
     <div className="jobDisplay mb-3">
       {job ? (
-        <div>
+        <div className="jobDisplay mb-3">
           <div className="pb-2 header-div px-4 pt-4 rounded-t-xl">
             <div className="capitalize text-xl font-semibold">
               {job && job.job}

@@ -15,9 +15,9 @@ import { useNavigate } from 'react-router-dom';
 import JobDisplay from './JobDisplay';
 import DeleteConfirm from './DeleteConfirm';
 
-const apiUrl = 'https://job-app-backend.onrender.com';
+// const apiUrl = 'https://job-app-backend.onrender.com';
 
-// const apiUrl = 'http://localhost:5000';
+const apiUrl = 'http://localhost:5000';
 
 // const apiUrl = 'https://git.heroku.com/job-app-backend-sunny.git';
 
@@ -266,6 +266,7 @@ function HomePage({ username }) {
   const [jobId, setJobId] = useState();
   const [deleteConfirmShow, setDeleteConfirmShow] = useState(false);
   const [deleteId, setDeleteId] = useState();
+  const [emptyFail, setEmptyFail] = useState(false);
 
   const navigate = useNavigate();
 
@@ -349,7 +350,6 @@ function HomePage({ username }) {
     } else {
       setContactEmailFail(false);
     }
-
     if (
       jobTitle !== '' &&
       jobTitle.length < 31 &&
@@ -570,6 +570,7 @@ function HomePage({ username }) {
           jobDescriptionFail={jobDescriptionFail}
           jobSalaryFail={jobSalaryFail}
           contactEmailFail={contactEmailFail}
+          companyNameFail={companyNameFail}
           setCompanyNameFail={setCompanyNameFail}
           setLocation={setLocation}
           locationFail={locationFail}
