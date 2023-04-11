@@ -15,163 +15,164 @@ import { useNavigate } from 'react-router-dom';
 import JobDisplay from './JobDisplay';
 import DeleteConfirm from './DeleteConfirm';
 
-// const apiUrl = 'https://job-app-backend.onrender.com';
+const apiUrl = 'https://job-app-backend.onrender.com';
 
-const apiUrl = 'http://localhost:5000';
+// const apiUrl = 'http://localhost:5000';
 
 // const apiUrl = 'https://git.heroku.com/job-app-backend-sunny.git';
 
-function JobCard({
-  job,
-  description,
-  id,
-  comments,
-  getComments,
-  setCommentsJobsArray,
-  commentsArray,
-  getJobs,
-  email,
-  userId,
-}) {
-  // useEffect(() => {
-  //   getComments()
-  //   setInterval(getComments, 5000)
-  // }, [])
+// function JobCard({
+//   job,
+//   description,
+//   id,
+//   comments,
+//   getComments,
+//   setCommentsJobsArray,
+//   commentsArray,
+//   getJobs,
+//   email,
+//   userId,
+// }) {
+//   // useEffect(() => {
+//   //   getComments()
+//   //   setInterval(getComments, 5000)
+//   // }, [])
 
-  const { user } = UserAuth();
+//   const { user } = UserAuth();
 
-  const [comment, setComment] = useState('');
+//   const [comment, setComment] = useState('');
 
-  const myHeaders = new Headers();
+//   const myHeaders = new Headers();
 
-  const myRequest = new Request(`${apiUrl}/jobs`, {
-    method: 'GET',
-    headers: myHeaders,
-    mode: 'cors',
-    cache: 'default',
-  });
+//   const myRequest = new Request(`${apiUrl}/jobs`, {
+//     method: 'GET',
+//     headers: myHeaders,
+//     mode: 'cors',
+//     cache: 'default',
+//   });
 
-  async function postData(url = '', data = {}) {
-    // Default options are marked with *
-    const response = await fetch(url, {
-      method: 'POST', // *GET, POST, PUT, DELETE, etc.
-      mode: 'cors', // no-cors, *cors, same-origin
-      cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-      credentials: 'same-origin', // include, *same-origin, omit
-      headers: {
-        'Content-Type': 'application/json',
-        // 'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      redirect: 'follow', // manual, *follow, error
-      referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-      body: JSON.stringify(data), // body data type must match "Content-Type" header
-    });
-    return response.json(); // parses JSON response into native JavaScript objects
-  }
+//   async function postData(url = '', data = {}) {
+//     // Default options are marked with *
+//     const response = await fetch(url, {
+//       method: 'POST', // *GET, POST, PUT, DELETE, etc.
+//       mode: 'cors', // no-cors, *cors, same-origin
+//       cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+//       credentials: 'same-origin', // include, *same-origin, omit
+//       headers: {
+//         'Content-Type': 'application/json',
+//         // 'Content-Type': 'application/x-www-form-urlencoded',
+//       },
+//       redirect: 'follow', // manual, *follow, error
+//       referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+//       body: JSON.stringify(data), // body data type must match "Content-Type" header
+//     });
+//     return response.json(); // parses JSON response into native JavaScript objects
+//   }
 
-  function handleCommentSubmit(e) {
-    e.preventDefault();
-    postData(`${apiUrl}/comments`, {
-      comment: comment,
-      id: id,
-      email: user.email,
-      userId: user.uid,
-      username: user.displayName,
-    }).then(data => {
-      console.log(data); // JSON data parsed by `data.json()` call
-      setComment('');
-      getComments();
-    });
-  }
+//   function handleCommentSubmit(e) {
+//     e.preventDefault();
+//     postData(`${apiUrl}/comments`, {
+//       comment: comment,
+//       id: id,
+//       email: user.email,
+//       userId: user.uid,
+//       username: user.displayName,
+//     }).then(data => {
+//       console.log(data); // JSON data parsed by `data.json()` call
+//       setComment('');
+//       getComments();
+//     });
+//   }
 
-  function deleteComment(commentId) {
-    postData(`${apiUrl}/deletecomment`, { id: commentId }).then(data => {
-      console.log(data);
-      console.log('calling getComments');
-      getComments(); // JSON data parsed by `data.json()` call
-    });
-  }
+//   function deleteComment(commentId) {
+//     postData(`${apiUrl}/deletecomment`, { id: commentId }).then(data => {
+//       console.log(data);
+//       console.log('calling getComments');
+//       getComments(); // JSON data parsed by `data.json()` call
+//     });
+//   }
 
-  function deleteJob(jobId) {
-    postData(`${apiUrl}/deletejob`, { id: jobId }).then(data => {
-      console.log(data);
-      getJobs();
-    });
-  }
+//   function deleteJob(jobId) {
+//     postData(`${apiUrl}/deletejob`, { id: jobId }).then(data => {
+//       console.log(data);
+//       getJobs();
+//       setJobId();
+//     });
+//   }
 
-  return (
-    <Card
-      style={{
-        width: '22rem',
-        margin: '30px auto',
-        boxShadow: '5px 5px 8px 0px #cbcbcb',
-      }}
-    >
-      <Card.Body>
-        <Card.Title>
-          {job} {email} {userId}
-        </Card.Title>
-        <Card.Text className="description-text">{description}</Card.Text>
-        <Button
-          key={id}
-          onClick={() => {
-            if (user.uid === userId) {
-              deleteJob(id);
-            }
-          }}
-        >
-          Delete Job
-        </Button>
-        <Form onSubmit={handleCommentSubmit}>
-          <div className="comment-div">
-            <div>
-              <Form.Group className="mb-3">
-                <Form.Control
-                  value={comment}
-                  placeholder="Write a comment..."
-                  onChange={e => setComment(e.target.value)}
-                />
-              </Form.Group>
-            </div>
-            <div className="comment-button-div">
-              <Button
-                variant="primary"
-                type="submit"
-                size="sm"
-                className="comment-button"
-              >
-                Post
-              </Button>
-            </div>
-          </div>
-        </Form>
-        <div>
-          {comments.map((comment, index) => (
-            <div
-              style={{
-                backgroundColor:
-                  index % 2 === 0 ? '#e7e7e7' : 'whitesmoke',
-              }}
-              className="p-2"
-            >
-              {comment.username} : {comment.comment}
-              <Button
-                key={comment.id}
-                onClick={() => {
-                  if (user.uid === comment.userId) {
-                    deleteComment(comment.id);
-                  }
-                }}
-              >
-                Delete
-              </Button>
-            </div>
-          ))}
-        </div>
-      </Card.Body>
-    </Card>
-  );
-}
+//   return (
+//     <Card
+//       style={{
+//         width: '22rem',
+//         margin: '30px auto',
+//         boxShadow: '5px 5px 8px 0px #cbcbcb',
+//       }}
+//     >
+//       <Card.Body>
+//         <Card.Title>
+//           {job} {email} {userId}
+//         </Card.Title>
+//         <Card.Text className="description-text">{description}</Card.Text>
+//         <Button
+//           key={id}
+//           onClick={() => {
+//             if (user.uid === userId) {
+//               deleteJob(id);
+//             }
+//           }}
+//         >
+//           Delete Job
+//         </Button>
+//         <Form onSubmit={handleCommentSubmit}>
+//           <div className="comment-div">
+//             <div>
+//               <Form.Group className="mb-3">
+//                 <Form.Control
+//                   value={comment}
+//                   placeholder="Write a comment..."
+//                   onChange={e => setComment(e.target.value)}
+//                 />
+//               </Form.Group>
+//             </div>
+//             <div className="comment-button-div">
+//               <Button
+//                 variant="primary"
+//                 type="submit"
+//                 size="sm"
+//                 className="comment-button"
+//               >
+//                 Post
+//               </Button>
+//             </div>
+//           </div>
+//         </Form>
+//         <div>
+//           {comments.map((comment, index) => (
+//             <div
+//               style={{
+//                 backgroundColor:
+//                   index % 2 === 0 ? '#e7e7e7' : 'whitesmoke',
+//               }}
+//               className="p-2"
+//             >
+//               {comment.username} : {comment.comment}
+//               <Button
+//                 key={comment.id}
+//                 onClick={() => {
+//                   if (user.uid === comment.userId) {
+//                     deleteComment(comment.id);
+//                   }
+//                 }}
+//               >
+//                 Delete
+//               </Button>
+//             </div>
+//           ))}
+//         </div>
+//       </Card.Body>
+//     </Card>
+//   );
+// }
 
 function HomePage({ username }) {
   const [commentsJobsArray, setCommentsJobsArray] = useState([]);
@@ -264,8 +265,18 @@ function HomePage({ username }) {
   const [contactEmailFail, setContactEmailFail] = useState(false);
   const [jobId, setJobId] = useState();
   const [deleteConfirmShow, setDeleteConfirmShow] = useState(false);
+  const [deleteId, setDeleteId] = useState();
 
   const navigate = useNavigate();
+
+  function deleteJob(jobId) {
+    postData(`${apiUrl}/deletejob`, { id: jobId }).then(data => {
+      console.log(data);
+      setDeleteConfirmShow(false);
+      getJobs();
+      setJobId();
+    });
+  }
 
   const handleLogout = async () => {
     try {
@@ -481,6 +492,7 @@ function HomePage({ username }) {
             {jobsArray.map(job => (
               <div className="mb-10 max-w-90 mx-auto">
                 <JobCardTwo
+                  deleteJob={deleteJob}
                   job={job.job}
                   description={job.description}
                   id={job.id}
@@ -501,6 +513,8 @@ function HomePage({ username }) {
                   location={job.location}
                   setJobId={setJobId}
                   jobId={jobId}
+                  setDeleteConfirmShow={setDeleteConfirmShow}
+                  setDeleteId={setDeleteId}
                 />
               </div>
             ))}
@@ -564,6 +578,8 @@ function HomePage({ username }) {
         <DeleteConfirm
           deleteConfirmShow={deleteConfirmShow}
           setDeleteConfirmShow={setDeleteConfirmShow}
+          deleteJob={deleteJob}
+          deleteId={deleteId}
         />
       </div>
     </>

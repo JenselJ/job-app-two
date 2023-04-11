@@ -52,7 +52,9 @@ const JobDisplay = ({ jobsArray, jobId }) => {
         </div>
       ) : (
         <div className="jobDisplay">
-          <div className="w-fit h-fit m-auto">Select a Job!</div>
+          <div className="w-fit h-fit m-auto font-semibold">
+            Select a Job!
+          </div>
         </div>
       )}
     </div>

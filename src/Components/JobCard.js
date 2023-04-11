@@ -31,6 +31,9 @@ export default function JobCardTwo({
   jobType,
   setJobId,
   jobId,
+  deleteJob,
+  setDeleteConfirmShow,
+  setDeleteId,
 }) {
   const { user } = UserAuth();
 
@@ -91,13 +94,6 @@ export default function JobCardTwo({
     });
   }
 
-  function deleteJob(jobId) {
-    postData(`${apiUrl}/deletejob`, { id: jobId }).then(data => {
-      console.log(data);
-      getJobs();
-    });
-  }
-
   function commentVisiblity() {
     console.log('comment visiblity triggered');
     if (visibility === 'none') {
@@ -139,7 +135,8 @@ export default function JobCardTwo({
               key={id}
               onClick={() => {
                 if (user.uid === userId) {
-                  deleteJob(id);
+                  setDeleteConfirmShow(true);
+                  setDeleteId(id);
                 }
               }}
             >
